@@ -1,19 +1,24 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+<script>
+import { RouterView } from 'vue-router'
+export default{
+  methods: {
+    signUp() {
+      this.$router.push('/sign-up')
+    },
+    logIn() {
+      this.$router.push('/log-in')
+    },
+  }
+}
 </script>
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
+    <img src="../src/assets/usiu_logo.png" alt="USIU Logo"/>
+    <h1>USIU-AFRICA DIGITAL MARKETPLACE <br> <div id="lower_heading">THE ENTIRE USIU MARKETPLACE AT YOUR FINGERTIPS</div></h1>
+    <div id="buttons">
+      <button @click="signUp()">SIGN UP</button>
+      <button @click="logIn()">LOG IN</button>
     </div>
   </header>
 
@@ -21,39 +26,45 @@ import HelloWorld from './components/HelloWorld.vue'
 </template>
 
 <style scoped>
-header {
+header img{
   line-height: 1.5;
-  max-height: 100vh;
+  width:25%;
 }
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
-  width: 100%;
-  font-size: 12px;
+header h1{
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  color: #2B3990;
+  width: 55%;
   text-align: center;
-  margin-top: 2rem;
+  border-left: 3px solid #2B3990;
+  border-right: 3px solid #2B3990;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  font-weight: bolder;
 }
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
+#lower_heading {
+  font-size: 80%;
+  font-style: italic;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: lighter;
 }
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
+header #buttons {
+  width: 15%;
+  margin: auto;
 }
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
+header #buttons button {
+  margin-left: 7%;
+  color: #FFFFFF;
+  background-color: #2B3990;
+  border-radius: 30px;
+  border: 3px solid #000000;
+  padding: 7%;
 }
-
-nav a:first-of-type {
-  border: 0;
+header #buttons button:hover{
+  border: 3px groove #FFFFFF;
+  cursor: pointer;
+}
+header {
+  border: 3px solid #2B3990;
 }
 
 @media (min-width: 1024px) {
