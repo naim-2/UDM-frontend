@@ -35,6 +35,8 @@
     For any enquiries, please contact:
     <br>
     nsalim@usiu.ac.ke
+    <br>
+    Copyright © 2023 UDM.com™. All rights reserved.
   </footer>
 </template>
 
@@ -60,7 +62,7 @@
     display: block;
     margin: 4%;
     margin-bottom: 0%;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    box-shadow: 10px 10px 10px 10px rgba(0,0,0,0.2);
     transition: 0.3s;
     border-radius: 5px;
     float: left;
@@ -77,6 +79,8 @@
 
   #myMenu li a{
     margin-bottom: 10px;
+    font-weight: bolder;
+    font-size: larger;
   }
 
   footer{

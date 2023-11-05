@@ -14,7 +14,7 @@ export default{
 
 <template>
   <header>
-    <img src="../src/assets/usiu_logo.png" alt="USIU Logo"/>
+    <img src="../src/assets/logo.png" alt="USIU Logo"/>
     <h1>USIU-AFRICA DIGITAL MARKETPLACE <br> <div id="lower_heading">THE ENTIRE USIU MARKETPLACE AT YOUR FINGERTIPS</div></h1>
     <div id="buttons">
       <button @click="signUp()">SIGN UP</button>
@@ -27,8 +27,10 @@ export default{
 
 <style scoped>
 header img{
-  line-height: 1.5;
-  width:25%;
+  line-height: 1;
+  width:10%;
+  margin-left: 8%;
+  margin-right: 8%;
 }
 header h1{
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -37,8 +39,8 @@ header h1{
   text-align: center;
   border-left: 3px solid #2B3990;
   border-right: 3px solid #2B3990;
-  padding-top: 5%;
-  padding-bottom: 5%;
+  padding-top: 2%;
+  padding-bottom: 2%;
   font-weight: bolder;
 }
 #lower_heading {
