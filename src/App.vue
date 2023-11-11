@@ -74,7 +74,6 @@ header #buttons button:hover{
 header {
   border: 3px solid #2B3990;
 }
-
 @media (min-width: 1024px) {
   header {
     display: flex;
@@ -99,6 +98,90 @@ header {
 
     padding: 1rem 0;
     margin-top: 1rem;
+  }
+}
+@media screen and (max-width: 1295px){
+  button {
+    margin: 0;
+    margin-top: 10px;
+    font-size: 10px;
+  }
+}
+@media screen and (max-width: 1100px){
+  h1{
+    font-size: larger;
+  }
+}
+@media screen and (max-width: 1024px){
+  header img{
+    line-height: 1;
+    width:10%;
+    margin-left: 3%;
+    margin-top: 0.5%;
+  }
+  header h1{
+    margin: 0;
+    margin-top: -8%;
+    margin-left: 15%;
+  }
+  header #buttons{
+    margin-top: -7%;
+    margin-left: 80%;
+    margin-bottom: 3%;
+  }
+}
+@media screen and (max-width: 993px){
+  header #buttons{
+    margin-top: -7%;
+    margin-left: 75%;
+    margin-bottom: 3%;
+    width: 20%;
+  }
+}
+@media screen and (max-width: 950px){
+  header img{
+    margin-top: 1.5%;
+  }
+}
+@media screen and (max-width: 850px){
+  header img{
+    margin-top: 2%;
+  }
+}
+@media screen and (max-width: 750px){
+  header #buttons{
+    width: 25%;
+    margin-top: -8%;
+    margin-left: 73%;
+  }
+}
+@media screen and (max-width: 605px){
+  header h1{
+    font-size: 15px;
+  }
+  header #buttons{
+    width: 15%;
+    margin-top: -13%;
+    margin-left: 77%;
+  }
+  header button{
+    width: 70px;
+  }
+}
+@media screen and (max-width: 480px){
+  header h1{
+    font-size: 13px;
+  }
+  header #buttons{
+    margin-top: -15%;
+  }
+}
+@media screen and (max-width: 430px){
+  header h1{
+    font-size: 10px;
+  }
+  header #buttons{
+    margin-top: -15%;
   }
 }
 </style>

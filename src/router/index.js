@@ -35,9 +35,14 @@ const router = createRouter({
       component: () => import('../views/Bags.vue')
     },
     {
-      path: '/nails',
-      name: 'nails',
-      component: () => import('../views/Nails.vue')
+      path: '/makeup',
+      name: 'makeup',
+      component: () => import('../views/Makeup.vue')
+    },
+    {
+      path: '/makeupservices',
+      name: 'makeupservices',
+      component: () => import('../views/MakeupServices.vue')
     },
     {
       path: '/laptops',
