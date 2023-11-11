@@ -22,12 +22,19 @@
     <input type="text" id="mySearch" v-on:keyup="myFunction" placeholder="Search.." title="Type in a category">
     
     <ul id="myMenu">
-      <li id="testingclothes"><RouterLink to='/clothes' target="_parent">Clothes<br><img src="../assets/clothes.png"></RouterLink></li>
-      <li><RouterLink to='/bags' target="_parent">Bags<br><img src="../assets/bags.png"></RouterLink></li>
-      <li><RouterLink to='/laptops' target="_parent">Laptops<br><img src="../assets/laptops.png"></RouterLink></li>
+      <li><RouterLink to='/clothes' target="_parent">Clothes<br><img src="../assets/clothes.png"></RouterLink></li>
+      <li><RouterLink to='/laundry' target="_parent">Laundry<br><img src="../assets/laundry.png"></RouterLink></li>
       <li><RouterLink to='/shoes' target="_parent">Shoes<br><img src="../assets/shoes.png"></RouterLink></li>
+      <li><RouterLink to='/bags' target="_parent">Bags<br><img src="../assets/bags.png"></RouterLink></li>
+      <li><RouterLink to='/nails' target="_parent">Nails & Makeup Accessories<br><img src="../assets/nails.png"></RouterLink></li>
+      <li><RouterLink to='/laptops' target="_parent">Laptops<br><img src="../assets/laptops.png"></RouterLink></li>
+      
       <li><RouterLink to='/smartphones' target="_parent">Smartphones<br><img src="../assets/smartphones.png"></RouterLink></li>
-      <li id="watches"><RouterLink to='/watches' target="_parent">Watches<br><img src="../assets/watches.png"></RouterLink></li>
+      <li><RouterLink to='/phonecases' target="_parent">Phone Cases<br><img src="../assets/phonecases.png"></RouterLink></li>
+      <li><RouterLink to='/watches' target="_parent">Watches<br><img src="../assets/watches.png"></RouterLink></li>
+      <li><RouterLink to='/electronics' target="_parent">Other Electronics<br><img src="../assets/electronics.png"></RouterLink></li>
+      <li><RouterLink to='/tutoring' target="_parent">Tutoring Services<br><img src="../assets/tutoring.png"></RouterLink></li>
+      <li><RouterLink to='/macronutrients' target="_parent">Macronutrients and pre-workout supplements<br><img src="../assets/macronutrients.png"></RouterLink></li>
     </ul>
   </div>
 
@@ -91,5 +98,6 @@
     padding: 2% 0% 2% 0%;
     font-size: larger;
     margin-top: 800px;
+    font-family: 'Poppins',sans-serif;
   }
 </style>

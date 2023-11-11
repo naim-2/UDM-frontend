@@ -3,51 +3,26 @@
       <head>
         <meta charset="UTF-8">
         <title> Log In Page </title>
-        <link rel="stylesheet" href="style.css">
          <meta name="viewport" content="width=device-width, initial-scale=1.0">
        </head>
     <body>
       <div class="container">
         <div class="title">Log In</div>
         <div class="content">
-          <form action="#">
+            {{ msg }}
             <div class="user-details">
               <div class="input-box">
                 <span class="details">Username</span>
-                <input type="text" placeholder="Enter your username" required>
+                <input type="text" placeholder="Enter your username" v-model="username" required>
               </div>
               <div class="input-box">
                 <span class="details">Password</span>
-                <input type="text" placeholder="Enter your password" required>
-              </div>
-            </div>
-            <div class="status-details">
-              <input type="radio" name="status" id="dot-1">
-              <input type="radio" name="status" id="dot-2">
-              <span class="status-title">Status</span>
-              <div class="category">
-                <label for="dot-1">
-                <span class="dot one"></span>
-                <span class="status">Buyer</span>
-              </label>
-              <label for="dot-2">
-                <span class="dot two"></span>
-                <span class="status">Seller</span>
-              </label>
-              <label for="">
-                <span class=""></span>
-                <span class=""></span>
-              </label>
-              <label for="">
-                <span class=""></span>
-                <span class=""></span>
-              </label>
+                <input type="password" placeholder="Enter your password" v-model="password" required>
               </div>
             </div>
             <div class="button">
-              <input type="submit" value="Log In">
+              <input type="submit" v-on:click="checkUser()" value="Log In">
             </div>
-          </form>
         </div>
       </div>
       <footer>
@@ -60,6 +35,39 @@
     </body>
     </html>
     </template>
+
+    <script>
+    import axios from 'axios';
+    export default {
+      name: 'CheckUser',
+      data() {
+        return {
+          username: '',
+          password: '',
+          msg: ''
+        };
+      },
+      methods: {
+        checkUser() {
+          const path = `https://udm-backend.onrender.com/login?username=${this.username}&password=${this.password}`;
+          axios.get(path)
+            .then((res) => {
+              if(res.data.length!=0){
+                this.msg = res.data['message'];
+                if(this.msg === "Logged in successfully!"){
+                    this.$router.push('/')
+                }
+                console.log(this.msg)
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        },
+      },
+    };
+  </script>
+
     <style scoped>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
     *{
@@ -69,12 +77,11 @@
       font-family: 'Poppins',sans-serif;
     }
     body{
-      height: 100vh;
+      height: 80vh;
       display: flex;
       justify-content: center;
       align-items: center;
       padding: 10px;
-      background: linear-gradient(135deg, #71b7e6, #2B3990);
     }
     .container{
       max-width: 700px;
@@ -85,6 +92,8 @@
       box-shadow: 0 5px 10px rgba(0,0,0,0.15);
       margin: auto;
       margin-top: 5%;
+
+      margin-left: 35%;
     }
     .container .title{
       font-size: 25px;
@@ -101,17 +110,17 @@
       border-radius: 5px;
       background: linear-gradient(135deg, #71b7e6, #2B3990);
     }
-    .content form .user-details{
+    .content .user-details{
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
       margin: 20px 0 12px 0;
     }
-    form .user-details .input-box{
+    .user-details .input-box{
       margin-bottom: 15px;
       width: calc(100% / 2 - 20px);
     }
-    form .input-box span.details{
+    .input-box span.details{
       display: block;
       font-weight: 500;
       margin-bottom: 5px;
@@ -131,22 +140,22 @@
     .user-details .input-box input:valid{
       border-color: #2B3990;
     }
-     form .gender-details .gender-title{
+     .gender-details .gender-title{
       font-size: 20px;
       font-weight: 500;
      }
-     form .category{
+     .category{
        display: flex;
        width: 80%;
        margin: 14px 0 ;
        justify-content: space-between;
      }
-     form .category label{
+     .category label{
        display: flex;
        align-items: center;
        cursor: pointer;
      }
-     form .category label .dot{
+     .category label .dot{
       height: 18px;
       width: 18px;
       border-radius: 50%;
@@ -161,14 +170,14 @@
        background: #2B3990;
        border-color: #d9d9d9;
      }
-     form input[type="radio"]{
+     input[type="radio"]{
        display: none;
      }
-     form .button{
+     .button{
        height: 45px;
        margin: 35px 0
      }
-     form .button input{
+     .button input{
        height: 100%;
        width: 100%;
        border-radius: 5px;
@@ -181,7 +190,7 @@
        transition: all 0.3s ease;
        background: linear-gradient(135deg, #71b7e6, #2B3990);
      }
-     form .button input:hover{
+     .button input:hover{
       /* transform: scale(0.99); */
       background: linear-gradient(-135deg, #71b7e6, #2B3990);
       }
@@ -192,20 +201,21 @@
         width: 100%;
         padding: 2% 0% 2% 0%;
         font-size: larger;
-        margin-top: 13%;
+        margin-top: 39%;
+        margin-left: -80%;
       }
      @media(max-width: 584px){
      .container{
       max-width: 100%;
     }
-    form .user-details .input-box{
+    .user-details .input-box{
         margin-bottom: 15px;
         width: 100%;
       }
-      form .category{
+      .category{
         width: 100%;
       }
-      .content form .user-details{
+      .content .user-details{
         max-height: 300px;
         overflow-y: scroll;
       }

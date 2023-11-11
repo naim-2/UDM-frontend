@@ -20,14 +20,9 @@ const router = createRouter({
       component: () => import('../views/Clothes.vue')
     },
     {
-      path: '/bags',
-      name: 'bags',
-      component: () => import('../views/Bags.vue')
-    },
-    {
-      path: '/laptops',
-      name: 'laptops',
-      component: () => import('../views/Laptops.vue')
+      path: '/laundry',
+      name: 'laundry',
+      component: () => import('../views/Laundry.vue')
     },
     {
       path: '/shoes',
@@ -35,14 +30,49 @@ const router = createRouter({
       component: () => import('../views/Shoes.vue')
     },
     {
+      path: '/bags',
+      name: 'bags',
+      component: () => import('../views/Bags.vue')
+    },
+    {
+      path: '/nails',
+      name: 'nails',
+      component: () => import('../views/Nails.vue')
+    },
+    {
+      path: '/laptops',
+      name: 'laptops',
+      component: () => import('../views/Laptops.vue')
+    },
+    {
       path: '/smartphones',
       name: 'smartphones',
       component: () => import('../views/Smartphones.vue')
     },
     {
+      path: '/phonecases',
+      name: 'phonecases',
+      component: () => import('../views/Phonecases.vue')
+    },
+    {
       path: '/watches',
       name: 'watches',
       component: () => import('../views/Watches.vue')
+    },
+    {
+      path: '/electronics',
+      name: 'electronics',
+      component: () => import('../views/Electronics.vue')
+    },
+    {
+      path: '/tutoring',
+      name: 'tutoring',
+      component: () => import('../views/Tutoring.vue')
+    },
+    {
+      path: '/macronutrients',
+      name: 'macronutrients',
+      component: () => import('../views/Macronutrients.vue')
     },
     {
       path: '/sign-up',

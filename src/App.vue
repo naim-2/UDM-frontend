@@ -2,6 +2,9 @@
 import { RouterView } from 'vue-router'
 export default{
   methods: {
+    homePage() {
+      this.$router.push('/')
+    },
     signUp() {
       this.$router.push('/sign-up')
     },
@@ -14,7 +17,7 @@ export default{
 
 <template>
   <header>
-    <img src="../src/assets/logo.png" alt="USIU Logo"/>
+    <img @click="homePage()" src="../src/assets/logo.png" alt="USIU Logo"/>
     <h1>USIU-AFRICA DIGITAL MARKETPLACE <br> <div id="lower_heading">THE ENTIRE USIU MARKETPLACE AT YOUR FINGERTIPS</div></h1>
     <div id="buttons">
       <button @click="signUp()">SIGN UP</button>
@@ -31,6 +34,9 @@ header img{
   width:10%;
   margin-left: 8%;
   margin-right: 8%;
+}
+header img:hover{
+  cursor: pointer;
 }
 header h1{
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
