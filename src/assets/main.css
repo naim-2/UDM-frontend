@@ -1,3 +1,412 @@
 *{
     background-color: #FFFFFF;
 }
+header img{
+    line-height: 1;
+    width:10%;
+    margin-left: 8%;
+    margin-right: 8%;
+  }
+  header img:hover{
+    cursor: pointer;
+  }
+  header h1{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: #2B3990;
+    width: 55%;
+    text-align: center;
+    border-left: 3px solid #2B3990;
+    border-right: 3px solid #2B3990;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    font-weight: bolder;
+  }
+  #lower_heading {
+    font-size: 80%;
+    font-style: italic;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: lighter;
+  }
+  header #buttons {
+    width: 15%;
+    margin: auto;
+  }
+  header #buttons button {
+    margin-left: 7%;
+    color: #FFFFFF;
+    background-color: #2B3990;
+    border-radius: 30px;
+    border: 3px solid #000000;
+    padding: 7%;
+  }
+  header #buttons button:hover{
+    border: 3px groove #FFFFFF;
+    cursor: pointer;
+  }
+  header {
+    border: 3px solid #2B3990;
+  }
+  @media (min-width: 1024px) {
+    header {
+      display: flex;
+      place-items: center;
+      padding-right: calc(var(--section-gap) / 2);
+    }
+  
+    .logo {
+      margin: 0 2rem 0 0;
+    }
+  
+    header .wrapper {
+      display: flex;
+      place-items: flex-start;
+      flex-wrap: wrap;
+    }
+  
+    nav {
+      text-align: left;
+      margin-left: -1rem;
+      font-size: 1rem;
+  
+      padding: 1rem 0;
+      margin-top: 1rem;
+    }
+  }
+  @media screen and (max-width: 1295px){
+    button {
+      margin: 0;
+      margin-top: 10px;
+      font-size: 10px;
+    }
+  }
+  @media screen and (max-width: 1100px){
+    h1{
+      font-size: larger;
+    }
+  }
+  @media screen and (max-width: 1024px){
+    header img{
+      line-height: 1;
+      width:10%;
+      margin-left: 3%;
+      margin-top: 0.5%;
+    }
+    header h1{
+      margin: 0;
+      margin-top: -8%;
+      margin-left: 15%;
+    }
+    header #buttons{
+      margin-top: -7%;
+      margin-left: 80%;
+      margin-bottom: 3%;
+    }
+  }
+  @media screen and (max-width: 993px){
+    header #buttons{
+      margin-top: -7%;
+      margin-left: 75%;
+      margin-bottom: 3%;
+      width: 20%;
+    }
+  }
+  @media screen and (max-width: 950px){
+    header img{
+      margin-top: 1.5%;
+    }
+  }
+  @media screen and (max-width: 850px){
+    header img{
+      margin-top: 2%;
+    }
+  }
+  @media screen and (max-width: 750px){
+    header #buttons{
+      width: 25%;
+      margin-top: -8%;
+      margin-left: 73%;
+    }
+  }
+  @media screen and (max-width: 605px){
+    header h1{
+      font-size: 15px;
+    }
+    header #buttons{
+      width: 15%;
+      margin-top: -13%;
+      margin-left: 77%;
+    }
+    header button{
+      width: 70px;
+    }
+  }
+  @media screen and (max-width: 480px){
+    header h1{
+      font-size: 13px;
+    }
+    header #buttons{
+      margin-top: -15%;
+    }
+  }
+  @media screen and (max-width: 430px){
+    header h1{
+      font-size: 10px;
+    }
+    header #buttons{
+      margin-top: -15%;
+    }
+  }
+  #buttons {
+    width: 15%;
+    margin-left: 83%;
+    margin-top: -7%;
+    margin-bottom: 7%;
+  }
+  #buttons button {
+    color: #FFFFFF;
+    margin-left: 5%;
+    background-color: #2B3990;
+    border-radius: 30px;
+    border: 3px solid #000000;
+    padding: 7%;
+  }
+  #buttons button:hover{
+    border: 3px groove #FFFFFF;
+    cursor: pointer;
+  }
+  #mySearch {
+      width: 90%;
+      font-size: 100%;
+      padding: 15px;
+      border: 1px solid #ddd;
+      margin: 1% 0 1% 4%;
+    }
+    
+    #myMenu {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      margin-left: 90px;
+    }
+    
+    #myMenu li a {
+      padding: 12px;
+      text-decoration: none;
+      color: #2B3990;
+      display: block;
+      margin: 4%;
+      margin-bottom: 0%;
+      box-shadow: 10px 10px 10px 10px rgba(0,0,0,0.2);
+      transition: 0.3s;
+      border-radius: 5px;
+      float: left;
+    }
+    
+    #myMenu li a:hover {
+      background-color: #eee;
+    }
+  
+    #myMenu img {
+      width: 400px;
+      height: 250px;
+    }
+  
+    #myMenu li a{
+      margin-bottom: 10px;
+      font-weight: bolder;
+      font-size: larger;
+    }
+  
+    footer{
+      background-color: #2B3990;
+      color: #FFFFFF;
+      text-align: center;
+      width: 100%;
+      padding: 2% 0% 2% 0%;
+      font-size: larger;
+      margin-top: 2000px;
+      font-family: 'Poppins',sans-serif;
+    }
+    @media screen and (max-width: 1780px){
+      #myMenu {
+        margin-left: 40px;
+      }
+    }
+    @media screen and (max-width: 1730px){
+      #myMenu {
+        margin-left: 20px;
+      }
+    }
+    @media screen and (max-width: 1710px){
+      #myMenu {
+        margin-left: 5px;
+      }
+    }
+    @media screen and (max-width: 1695px){
+      #myMenu {
+        margin-left: 300px;
+      }
+      footer{
+        margin-top: 2650px;
+      }
+    }
+    @media screen and (max-width: 1595px){
+      #myMenu {
+        margin-left: 250px;
+      }
+    }
+    @media screen and (max-width: 1495px){
+      #myMenu {
+        margin-left: 200px;
+      }
+    }
+    @media screen and (max-width: 1395px){
+      #myMenu {
+        margin-left: 150px;
+      }
+    }
+    @media screen and (max-width: 1295px){
+      #myMenu {
+        margin-left: 100px;
+      }
+    }
+    @media screen and (max-width: 1195px){
+      #myMenu {
+        margin-left: 50px;
+      }
+    }
+    @media screen and (max-width: 1120px){
+      #myMenu {
+        margin-left: 25px;
+      }
+    }
+    @media screen and (max-width: 1080px){
+      #myMenu {
+        margin-left: 15px;
+      }
+    }
+    @media screen and (max-width: 1045px){
+      #myMenu {
+        margin-left: 4px;
+      }
+    }
+    @media screen and (max-width: 1030px){
+      #myMenu {
+        margin-left: 10%;
+        font-size: smaller;
+      }
+      #myMenu img {
+        width: 300px;
+        height: 180px;
+      }
+      footer {
+        margin-top: 2000px;
+        font-size: smaller;
+      }
+    }
+    @media screen and (max-width: 950px){
+      #myMenu {
+        margin-left: 7%;
+      }
+    }
+    @media screen and (max-width: 900px){
+      #myMenu {
+        margin-left: 5%;
+      }
+    }
+    @media screen and (max-width: 850px){
+      #myMenu {
+        margin-left: 2%;
+      }
+    }
+    @media screen and (max-width: 805px){
+      #mySearch{
+        font-size: 90%;
+      }
+      #myMenu {
+        margin-left: 1%;
+      }
+    }
+    @media screen and (max-width: 795px){
+      #myMenu {
+        margin-left: 20%;
+      }
+      #myMenu img {
+        width: 400px;
+        height: 250px;
+      }
+      footer{
+        margin-top: 4400px;
+      }
+    }
+    @media screen and (max-width: 750px){
+      #myMenu {
+        margin-left: 15%;
+      }
+    }
+    @media screen and (max-width: 640px){
+      #mySearch{
+        margin-left:3%;
+      }
+      #myMenu {
+        margin-left: 12%;
+      }
+    }
+    @media screen and (max-width: 600px){
+      #myMenu {
+        margin-left: 9%;
+      }
+      footer{
+        margin-top: 4350px;
+      }
+    }
+    @media screen and (max-width: 550px){
+      #mySearch{
+        margin-left: 2%;
+        font-size: 80%;
+      }
+      #myMenu {
+        margin-left: 15%;
+      }
+      #myMenu img {
+        width: 300px;
+        height: 180px;
+      }
+      footer{
+        margin-top: 3400px;
+      }
+    }
+    @media screen and (max-width: 500px){
+      #mySearch{
+        margin-left: 1%;
+      }
+      #myMenu {
+        margin-left: 10%;
+      }
+    }
+    @media screen and (max-width: 430px){
+      #myMenu {
+        margin-left: 5%;
+      }
+      footer{
+        margin-top: 3350px;
+      }
+    }
+    @media screen and (max-width: 400px){
+      #mySearch{
+        margin-left: 0.5%;
+        font-size: 60%;
+      }
+      #myMenu{
+        font-size: 9px;
+        margin-left: 15%;
+      }
+      #myMenu img{
+        width: 200px;
+        height: 120px;
+      }
+      footer{
+        margin-top: 2450px;
+      }
+    }
+  

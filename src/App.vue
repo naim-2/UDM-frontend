@@ -1,6 +1,19 @@
 <script>
 import { RouterView } from 'vue-router'
+import { useUserStore } from '@/stores/users';
 export default{
+  name: '',
+    data() {
+      return {
+        username: '',
+        selectedUser: useUserStore().UserSelected,
+      };
+    },
+  beforeMount(){
+    if(JSON.stringify(this.selectedUser)!=='{}'){
+      this.username = this.selectedUser
+    }
+  },
   methods: {
     homePage() {
       this.$router.push('/')
@@ -11,20 +24,14 @@ export default{
     logIn() {
       this.$router.push('/log-in')
     },
+    seller() {
+      this.$router.push('/sell')
+    },
   }
 }
 </script>
 
 <template>
-  <header>
-    <img @click="homePage()" src="../src/assets/logo.png" alt="USIU Logo"/>
-    <h1>USIU-AFRICA DIGITAL MARKETPLACE <br> <div id="lower_heading">THE ENTIRE USIU MARKETPLACE AT YOUR FINGERTIPS</div></h1>
-    <div id="buttons">
-      <button @click="signUp()">SIGN UP</button>
-      <button @click="logIn()">LOG IN</button>
-    </div>
-  </header>
-
   <RouterView />
 </template>
 

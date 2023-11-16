@@ -1,4 +1,13 @@
 <template>
+  <header>
+    <img @click="homePage()" src="../../src/assets/logo.png" alt="USIU Logo"/>
+    <h1>USIU-AFRICA DIGITAL MARKETPLACE <br> <div id="lower_heading">THE ENTIRE USIU MARKETPLACE AT YOUR FINGERTIPS</div></h1>
+    <div id="buttons">
+      <button @click="signUp()">SIGN UP</button>
+      <button @click="logIn()">LOG IN</button>
+    </div>
+  </header>
+
     <html lang="en" dir="ltr">
       <head>
         <meta charset="UTF-8">
@@ -38,6 +47,7 @@
 
     <script>
     import axios from 'axios';
+    import { useUserStore } from '@/stores/users';
     export default {
       name: 'CheckUser',
       data() {
@@ -55,6 +65,7 @@
               if(res.data.length!=0){
                 this.msg = res.data['message'];
                 if(this.msg === "Logged in successfully!"){
+                    useUserStore().changeUser(this.username);
                     this.$router.push('/')
                 }
                 console.log(this.msg)
@@ -63,6 +74,18 @@
             .catch((error) => {
               console.error(error);
             });
+        },
+        homePage() {
+          this.$router.push('/')
+        },
+        signUp() {
+          this.$router.push('/sign-up')
+        },
+        logIn() {
+          this.$router.push('/log-in')
+        },
+        seller() {
+          this.$router.push('/sell')
         },
       },
     };
@@ -75,6 +98,15 @@
       padding: 0;
       box-sizing: border-box;
       font-family: 'Poppins',sans-serif;
+    }
+    header img{
+      line-height: 1;
+      width:10%;
+      margin-left: 8%;
+      margin-right: 8%;
+    }
+    header img:hover{
+      cursor: pointer;
     }
     body{
       height: 80vh;
@@ -201,7 +233,7 @@
         width: 100%;
         padding: 2% 0% 2% 0%;
         font-size: larger;
-        margin-top: 39%;
+        margin-top: 43%;
         margin-left: -80%;
       }
      @media(max-width: 584px){

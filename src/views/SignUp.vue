@@ -1,4 +1,13 @@
 <template>
+  <header>
+    <img @click="homePage()" src="../../src/assets/logo.png" alt="USIU Logo"/>
+    <h1>USIU-AFRICA DIGITAL MARKETPLACE <br> <div id="lower_heading">THE ENTIRE USIU MARKETPLACE AT YOUR FINGERTIPS</div></h1>
+    <div id="buttons">
+      <button @click="signUp()">SIGN UP</button>
+      <button @click="logIn()">LOG IN</button>
+    </div>
+  </header>
+  
     <html lang="en" dir="ltr">
       <head>
         <meta charset="UTF-8">
@@ -37,7 +46,7 @@
                 </div>
             </div>
             <div class="button">
-                <input type="submit" v-on:click="verify(username)" value="Sign Up">
+                <input type="submit" v-on:click="verify()" value="Sign Up">
             </div>
         </div>
       </div>
@@ -52,7 +61,7 @@
     </html>
     </template>
 
-        <script>
+    <script>
     import axios from 'axios';
     import { useUserStore } from '@/stores/users';
     export default {
@@ -69,9 +78,7 @@
         };
       },
       methods: {
-        verify(user){
-            this.user(user);
-            // console.log(this.useUserStore().UserSelected)
+        verify(){
             if (this.fullName.split(" ").length !== 2 && this.fullName.split(" ").length  !== 3){
                 this.msg = "Please input two or three names!";
                 return;
@@ -90,14 +97,9 @@
                 this.msg = "Passwords do not match!"
                 return;
             }
-            this.addUser(user);
+            this.addUser();
         },
-        user(user){
-            console.log(user)
-            console.log(useUserStore().changeUser(user))
-            console.log(useUserStore().UserSelected)
-        },
-        addUser(user) {
+        addUser() {
           const path = 'https://udm-backend.onrender.com/addUser';
           axios.post(path, {
               "username": this.username,
@@ -112,8 +114,8 @@
               if(res.data.length!=0){
                 this.msg = res.data['message'];
                 if(this.msg === "Signed Up successfully!"){
-                    useUserStore.changeUser(user);
-                    this.$router.push('/')
+                    useUserStore().changeUser(this.username);
+                    this.$router.go('/')
                 }
                 console.log(this.msg)
               }
@@ -121,6 +123,18 @@
             .catch((error) => {
               console.error(error);
             });
+        },
+        homePage() {
+          this.$router.push('/')
+        },
+        signUp() {
+          this.$router.push('/sign-up')
+        },
+        logIn() {
+          this.$router.push('/log-in')
+        },
+        seller() {
+          this.$router.push('/sell')
         },
       },
     };
@@ -132,6 +146,15 @@
       padding: 0;
       box-sizing: border-box;
       font-family: 'Poppins',sans-serif;
+    }
+    header img{
+      line-height: 1;
+      width:10%;
+      margin-left: 8%;
+      margin-right: 8%;
+    }
+    header img:hover{
+      cursor: pointer;
     }
     body{
       height: 80vh;
@@ -258,7 +281,7 @@
         width: 100%;
         padding: 2% 0% 2% 0%;
         font-size: larger;
-        margin-top: 39%;
+        margin-top: 43%;
         margin-left: -80%;
       }
      @media(max-width: 584px){
