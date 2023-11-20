@@ -216,6 +216,50 @@ header img{
       font-weight: bolder;
       font-size: larger;
     }
+
+    #myMenu2 {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      margin-left: 90px;
+      font-size: larger;
+    }
+    
+    #myMenu2 li{
+      padding: 12px;
+      text-decoration: none;
+      color: #2B3990;
+      display: block;
+      margin: 3%;
+      margin-bottom: 0%;
+      box-shadow: 10px 10px 10px 10px rgba(0,0,0,0.2);
+      transition: 0.3s;
+      border-radius: 5px;
+      float: left;
+      width: 40%;
+    }
+    
+    #myMenu2 li:hover {
+      background-color: #eee;
+    }
+  
+    #myMenu2 img {
+      width: 300px;
+      height: 250px;
+      float: left;
+    }
+
+    #myMenu2 p {
+      float: left;
+      margin-left: 5%;
+      font-size: larger;
+    }
+  
+    #myMenu li a{
+      margin-bottom: 10px;
+      font-weight: bolder;
+      font-size: larger;
+    }
   
     footer{
       background-color: #2B3990;
@@ -546,11 +590,6 @@ header img{
       }
       .responsive-table tbody tr:last-of-type {
         margin-bottom: 0;
-      }
-      @media (min-width: 48em) {
-        .responsive-table tbody tr:nth-of-type(even) {
-          background-color: rgba(0, 0, 0, 0.12);
-        }
       }
       .responsive-table tbody th[scope=row] {
         background-color: #2B3990;
