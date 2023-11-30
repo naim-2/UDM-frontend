@@ -156,7 +156,7 @@ export default{
         <li>
             <img v-bind:src="product[3]">
             <p style="white-space: pre;">
-                <strong>{{product[1]}} <em>@ Ksh. {{ product[5] }}</em></strong> <br><br>Only {{ product[6] }} remaining <br><br><em>Details:</em><br>{{ product[4] }}
+                <strong>{{product[1]}} <em>@ Kshs. {{ product[5] }}</em></strong> <br><br>Only {{ product[6] }} remaining <br><br><em>Details:</em><br>{{ product[4] }}
             </p>
         </li>
     </ul>  
@@ -166,7 +166,7 @@ export default{
         <li>
             <img v-bind:src="product[3]">
             <p style="white-space: pre;">
-                <strong>{{product[1]}} <em>@ Ksh. {{ product[5] }}</em></strong> <br><br>Only {{ product[6] }} remaining <br><br><em>Details:</em><br>{{ product[4] }}
+                <strong>{{product[1]}} <em>@ Kshs. {{ product[5] }}</em></strong> <br><br>Only {{ product[6] }} remaining <br><br><em>Details:</em><br>{{ product[4] }}
             </p>
         </li>
     </ul>

@@ -31,7 +31,7 @@
                   </div>
                   <div class="input-box">
                   <span class="details">Product Price</span>
-                  <input type="number" placeholder="Enter the price in Ksh" v-model="price" required>
+                  <input type="number" placeholder="Enter the price in Kshs" v-model="price" required>
                   </div>
                   <div class="input-box">
                   <span class="details">Quantity</span>

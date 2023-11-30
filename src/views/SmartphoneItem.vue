@@ -27,7 +27,14 @@ export default{
         selectedUser: useUserStore().UserSelected,
         products: '',
         selectedProduct: '',
-        msg: ''
+        msg: '',
+        call: '',
+        sellerFirstname: '',
+        sellerLastname: '',
+        sellerPhonenumber: '',
+        sellerEmail: '',
+        userFirstname: '',
+        userLastname: ''
       };
     },
   beforeMount(){
@@ -38,6 +45,32 @@ export default{
         this.selectedProduct = useSelectedProductStore().ProductSelected
     }
     this.viewProducts()
+  },
+  mounted(){
+    const path = `https://udm-backend.onrender.com/viewSeller?username=${this.selectedProduct[0]}`;
+      axios.get(path)
+      .then((res) => {
+          if(res.data.length!=0){
+            this.sellerFirstname = res.data[0]
+            this.sellerLastname = res.data[1]
+            this.sellerPhonenumber = res.data[2]
+            this.sellerEmail = res.data[3]
+          }
+      })
+      .catch((error) => {
+          console.error(error);
+      });
+      const path2 = `https://udm-backend.onrender.com/user?username=${this.selectedUser}`;
+      axios.get(path2)
+      .then((res) => {
+          if(res.data.length!=0){
+            this.userFirstname = res.data[0]
+            this.userLastname = res.data[1]
+          }
+      })
+      .catch((error) => {
+          console.error(error);
+      });
   },
   methods: {
     viewProducts() {
@@ -72,7 +105,7 @@ export default{
     chosenProduct(product) {
         useSelectedProductStore().changeProduct(product)
         this.$router.push(`/smartphones/${product[1]}`)
-    }
+    },
   }
 }
 </script>
@@ -99,7 +132,7 @@ export default{
     <RouterLink to='/makeupservices' target="_parent"><button id="notactivated">Makeup Services</button></RouterLink>
     <RouterLink to='/phonecases' target="_parent"><button id="notactivated">Phone Cases</button></RouterLink>
     <RouterLink to='/shoes' target="_parent"><button id="notactivated">Shoes</button></RouterLink>
-    <button id="activated">Smartphones</button>
+    <RouterLink to='/smartphones' target="_parent"><button id="activated2">Smartphones</button></RouterLink>
     <RouterLink to='/tutoring' target="_parent"><button id="notactivated">Tutoring Services</button></RouterLink>
     <RouterLink to='/watches' target="_parent"><button id="notactivated">Watches</button></RouterLink>
   </div>
@@ -110,10 +143,11 @@ export default{
         <li>
             <img v-bind:src="selectedProduct[3]">
             <p style="white-space: pre;">
-                <strong>{{selectedProduct[1]}} <em>@ Ksh. {{ selectedProduct[5] }}</em></strong> <br><br>Only {{ selectedProduct[6] }} remaining <br><br><em>Details:</em><br>{{ selectedProduct[4] }}
+                <strong>{{selectedProduct[1]}} <em>@ Kshs. {{ selectedProduct[5] }}</em></strong> <br><br>Only {{ selectedProduct[6] }} remaining <br><br><em>Details:</em><br>{{ selectedProduct[4] }}
             </p>
-            <input id="contact" type="submit" v-on:click="call()" value="Call">
-            <input id="contact" type="submit" v-on:click="email()" value="Email">
+            <p id="names">Seller's Name: <strong>{{sellerFirstname}} {{sellerLastname}}</strong></p>
+            <a v-bind:href="'tel:'+sellerPhonenumber"><input id="contact" type="submit" value="Call"></a>
+            <a :data="selectedProduct" v-bind:href="'mailto:'+sellerEmail+'?subject=UDM SMARTPHONES&body=Greetings, I am interested at the product with the name: '+selectedProduct[1]+'; that goes at Kshs. '+selectedProduct[5]+' with only '+selectedProduct[6]+' remaining. Kind regards, '+userFirstname+' '+userLastname+'.'"><input id="contact" type="submit" value="Email"></a>
         </li>
     </ul>  
   </div>
@@ -144,7 +178,7 @@ export default{
     border: 1px solid #777777;
     padding: 15px;
   }
-  #activated{
+  #activated2{
     background-color: #FFFFFF;
     color: #000000;
   }
@@ -158,16 +192,20 @@ export default{
   #navigation #notactivated:hover{
     cursor: pointer;
   }
-  #navigation #activated:hover{
-    cursor: not-allowed;
+  #navigation #activated2:hover{
+    cursor: pointer;
   }
   #search{
     margin-bottom: 330px;
   }
+  #names{
+    margin: 50px 0 0 600px;
+    text-align: center;
+  }
   #contact{
     height: 45px;
     width: 200px;
-    margin: 50px 0 0 600px;
+    margin: 30px 0 0 600px;
     border-radius: 5px;
     border: none;
     color: #fff;
