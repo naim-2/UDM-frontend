@@ -59,7 +59,7 @@
       },
       methods: {
         checkUser() {
-          const path = `https://udm-backend.onrender.com/login?username=${this.username}&password=${this.password}`;
+          const path = `https://udm-backend.onrender.com/login?username=${this.username.toLowerCase()}&password=${this.password}`;
           axios.get(path)
             .then((res) => {
               if(res.data.length!=0){

@@ -78,8 +78,8 @@
             image: useProductStore().ProductSelected[3],
             details: useProductStore().ProductSelected[4],
             msg: '',
-            categories: ["Clothes","Laundry Services","Shoes","Bags","Makeup Accessories","Makeup Services","Laptops", "Smartphones",
-            "Phone Cases","Watches","Earphones and Headsets","Tutoring Services","Macronutrients and Other Supplements"],
+            categories: ["Bags","Clothes","Earphones and Headsets","Laptops","Laundry Services","Macronutrients and Other Supplements",
+            "Makeup Accessories","Makeup Services","Phone Cases","Shoes","Smartphones","Tutoring Services","Watches"],
             selectedCategory: useProductStore().ProductSelected[2],
           };
         },
@@ -108,10 +108,17 @@
               this.editProduct();
           },
           editProduct() {
+            let productWords = ''
+            if(this.productName.split(" ").length > 0){
+              for(let i=0; i<this.productName.split(" ").length; i++){
+                productWords += (this.productName.split(" ")[i].toLowerCase())[0].toUpperCase() + (this.productName.split(" ")[i].toLowerCase()).slice(1).toLowerCase()+" "
+              }
+              productWords = productWords.substring(0, productWords.length - 1)
+            }
             const path = 'https://udm-backend.onrender.com/updateProduct';
             axios.put(path, {
-                "username": this.username,
-                "productname": this.productName,
+                "username": this.username.toLowerCase(),
+                "productname": productWords,
                 "category": this.selectedCategory,
                 "photo": this.image,
                 "productdetails": this.details,

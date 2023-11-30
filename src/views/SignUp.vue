@@ -38,11 +38,11 @@
                 </div>
                 <div class="input-box">
                 <span class="details">Password</span>
-                <input type="text" placeholder="Enter your password" v-model="password" required>
+                <input type="password" placeholder="Enter your password" v-model="password" required>
                 </div>
                 <div class="input-box">
                 <span class="details">Confirm Password</span>
-                <input type="text" placeholder="Confirm your password" v-model="confirmPassword" required>
+                <input type="password" placeholder="Confirm your password" v-model="confirmPassword" required>
                 </div>
             </div>
             <div class="button">
@@ -102,11 +102,11 @@
         addUser() {
           const path = 'https://udm-backend.onrender.com/addUser';
           axios.post(path, {
-              "username": this.username,
-              "firstname": this.fullName.split(" ")[0],
-              "lastname": this.fullName.split(" ")[1],
+              "username": this.username.toLowerCase(),
+              "firstname": (this.fullName.split(" ")[0].toLowerCase())[0].toUpperCase() + (this.fullName.split(" ")[0].toLowerCase()).slice(1).toLowerCase(),
+              "lastname": (this.fullName.split(" ")[1].toLowerCase())[0].toUpperCase() + (this.fullName.split(" ")[1].toLowerCase()).slice(1).toLowerCase(),
               "phonenumber": this.phoneNumber,
-              "email": this.email,
+              "email": this.email.toLowerCase(),
               "password": this.password,
               "status": "buyer"
           })
@@ -115,7 +115,7 @@
                 this.msg = res.data['message'];
                 if(this.msg === "Signed Up successfully!"){
                     useUserStore().changeUser(this.username);
-                    this.$router.go('/')
+                    this.$router.push('/')
                 }
                 console.log(this.msg)
               }

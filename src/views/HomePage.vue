@@ -41,7 +41,21 @@ export default{
       this.$router.push('/log-in')
     },
     seller() {
-      this.$router.push('/sell')
+      const path = 'https://udm-backend.onrender.com/changeUser';
+      axios.put(path, {
+          "username": this.selectedUser.toLowerCase(),
+          "status": "seller"
+      })
+        .then((res) => {
+          if(res.data.length!=0){
+            if(res.data['message'] === "Status changed successfully!"){
+                this.$router.push('/sell')
+            }
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     },
   }
 }
