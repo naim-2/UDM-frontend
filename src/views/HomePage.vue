@@ -17,6 +17,7 @@
   }}
 import { RouterView } from 'vue-router'
 import { useUserStore } from '@/stores/users';
+import axios from 'axios'
 export default{
   name: '',
     data() {
@@ -57,6 +58,11 @@ export default{
           console.error(error);
         });
     },
+    signout(){
+      useUserStore().changeUser(undefined);
+      this.selectedUser = ''
+      this.$router.go('/');
+    }
   }
 }
 </script>
@@ -69,6 +75,7 @@ export default{
       <button v-if="!username" @click="signUp()">SIGN UP</button>
       <button v-if="!username" @click="logIn()">LOG IN</button>
       <button v-if="username" @click="seller()">CHANGE TO SELLER</button>
+      <button v-if="username" @click="signout()">SIGN OUT</button>
     </div>
   </header>
 
@@ -77,7 +84,23 @@ export default{
   <div id="search">
     <input type="text" id="mySearch" v-on:keyup="myFunction" placeholder="Search.." title="Type in a category">
     
-    <ul id="myMenu">
+    <ul v-if="!username" id="myMenu">
+      <li><RouterLink to='/log-in' target="_parent">Bags<br><img src="../assets/bags.png"></RouterLink></li>
+      <li><RouterLink to='/log-in' target="_parent">Clothes<br><img src="../assets/clothes.png"></RouterLink></li>
+      <li><RouterLink to='/log-in' target="_parent">Earphones and Headsets<br><img src="../assets/electronics.png"></RouterLink></li>
+      <li><RouterLink to='/log-in' target="_parent">Laptops<br><img src="../assets/laptops.png"></RouterLink></li>
+      <li><RouterLink to='/log-in' target="_parent">Laundry Services<br><img src="../assets/laundry.png"></RouterLink></li>
+      <li><RouterLink to='/log-in' target="_parent">Macronutrients and Other Supplements<br><img src="../assets/macronutrients.png"></RouterLink></li>
+      <li><RouterLink to='/log-in' target="_parent">Makeup Accessories<br><img src="../assets/makeup.png"></RouterLink></li>
+      <li><RouterLink to='/log-in' target="_parent">Makeup Services<br><img src="../assets/makeupservices.png"></RouterLink></li>
+      <li><RouterLink to='/log-in' target="_parent">Phone Cases<br><img src="../assets/phonecases.png"></RouterLink></li>
+      <li><RouterLink to='/log-in' target="_parent">Shoes<br><img src="../assets/shoes.png"></RouterLink></li>
+      <li><RouterLink to='/log-in' target="_parent">Smartphones<br><img src="../assets/smartphones.png"></RouterLink></li>
+      <li><RouterLink to='/log-in' target="_parent">Tutoring Services<br><img src="../assets/tutoring.png"></RouterLink></li>
+      <li><RouterLink to='/log-in' target="_parent">Watches<br><img src="../assets/watches.png"></RouterLink></li>
+    </ul>
+
+    <ul v-if="username" id="myMenu">
       <li><RouterLink to='/bags' target="_parent">Bags<br><img src="../assets/bags.png"></RouterLink></li>
       <li><RouterLink to='/clothes' target="_parent">Clothes<br><img src="../assets/clothes.png"></RouterLink></li>
       <li><RouterLink to='/electronics' target="_parent">Earphones and Headsets<br><img src="../assets/electronics.png"></RouterLink></li>

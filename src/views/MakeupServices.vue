@@ -28,6 +28,11 @@ export default{
     }
     this.viewProducts()
   },
+  beforeMount(){
+    if(useUserStore().UserSelected.length === undefined){
+      this.$router.push('/log-in')
+    }
+  },
   methods: {
     viewProducts() {
         const path = "https://udm-backend.onrender.com/viewProduct?category=Makeup Services";
@@ -113,6 +118,11 @@ export default{
           }
         }
       }
+    },
+    signout(){
+      useUserStore().changeUser(undefined);
+      this.selectedUser = ''
+      this.$router.go('/');
     }
   }
 }
@@ -126,6 +136,7 @@ export default{
       <button v-if="!username" @click="signUp()">SIGN UP</button>
       <button v-if="!username" @click="logIn()">LOG IN</button>
       <button v-if="username" @click="seller()">CHANGE TO SELLER</button>
+      <button v-if="username" @click="signout()">SIGN OUT</button>
     </div>
   </header>
 

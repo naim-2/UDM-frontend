@@ -13,6 +13,9 @@ export default{
     if(JSON.stringify(this.selectedUser)!=='{}'){
       this.username = this.selectedUser
     }
+    if(useUserStore().UserSelected.length === undefined){
+      this.$router.push('/log-in')
+    }
   },
   methods: {
     homePage() {

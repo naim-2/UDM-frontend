@@ -66,7 +66,21 @@
                 this.msg = res.data['message'];
                 if(this.msg === "Logged in successfully!"){
                     useUserStore().changeUser(this.username);
-                    this.$router.push('/')
+                    const path = `https://udm-backend.onrender.com/user?username=${this.username}`;
+                    axios.get(path)
+                    .then((res) => {
+                        if(res.data.length!=0){
+                          if(res.data[3] === "buyer"){
+                            this.$router.push('/')
+                          }
+                          else{
+                            this.$router.push('/sell')
+                          }
+                        }
+                    })
+                    .catch((error) => {
+                        console.error(error);
+                    });
                 }
                 console.log(this.msg)
               }

@@ -4,7 +4,8 @@
       <h1>USIU-AFRICA DIGITAL MARKETPLACE <br> <div id="lower_heading">THE ENTIRE USIU MARKETPLACE AT YOUR FINGERTIPS</div></h1>
       <div id="buttons">
         <button @click="buyer()">CHANGE TO BUYER</button>
-      </div>
+        <button @click="signout()">SIGN OUT</button>
+    </div>
     </header>
     
       <html lang="en" dir="ltr">
@@ -83,7 +84,12 @@
             selectedCategory: useProductStore().ProductSelected[2],
           };
         },
-        methods: {
+        beforeMount(){
+    if(useUserStore().UserSelected.length === undefined){
+      this.$router.push('/log-in')
+    }
+  },
+  methods: {
           verify(){
               if (this.selectedCategory.length === 0){
                   this.msg = "Please input the product category!";
@@ -149,6 +155,11 @@
           cancel() {
             this.$router.push('/sell')
           },
+          signout(){
+            useUserStore().changeUser(undefined);
+            this.selectedUser = ''
+            this.$router.go('/');
+          }
         },
       };
       

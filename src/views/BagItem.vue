@@ -72,7 +72,11 @@ export default{
           console.error(error);
       });
   },
-  methods: {
+  beforeMount(){
+    if(useUserStore().UserSelected.length === undefined){
+      this.$router.push('/log-in')
+    }
+  },
     viewProducts() {
         const path = "https://udm-backend.onrender.com/viewProduct?category=Bags";
         axios.get(path)
@@ -106,7 +110,11 @@ export default{
         useSelectedProductStore().changeProduct(product)
         this.$router.push(`/bags/${product[1]}`)
     },
-  }
+    signout(){
+      useUserStore().changeUser(undefined);
+      this.selectedUser = ''
+      this.$router.go('/');
+    }
 }
 </script>
 
@@ -118,6 +126,7 @@ export default{
       <button v-if="!username" @click="signUp()">SIGN UP</button>
       <button v-if="!username" @click="logIn()">LOG IN</button>
       <button v-if="username" @click="seller()">CHANGE TO SELLER</button>
+      <button v-if="username" @click="signout()">SIGN OUT</button>
     </div>
   </header>
 

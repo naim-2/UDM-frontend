@@ -16,7 +16,12 @@
       mounted(){
         this.checkProducts()
       },
-      methods: {
+      beforeMount(){
+    if(useUserStore().UserSelected.length === undefined){
+      this.$router.push('/log-in')
+    }
+  },
+  methods: {
         checkProducts() {
           const path = `https://udm-backend.onrender.com/viewSellerProduct?username=${this.selectedUser}`;
           axios.get(path)
@@ -63,6 +68,11 @@
     
               console.error(error);
             });
+        },
+        signout(){
+          useUserStore().changeUser(undefined);
+          this.selectedUser = ''
+          this.$router.go('/');
         }
     }
 }
@@ -74,6 +84,7 @@
         <h1>USIU-AFRICA DIGITAL MARKETPLACE <br> <div id="lower_heading">THE ENTIRE USIU MARKETPLACE AT YOUR FINGERTIPS</div></h1>
         <div id="buttons">
             <button @click="buyer()">CHANGE TO BUYER</button>
+            <button @click="signout()">SIGN OUT</button>
         </div>
     </header>
 
