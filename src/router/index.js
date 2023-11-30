@@ -107,8 +107,68 @@ const router = createRouter({
     {
       path: '/clothes/:product',
       name: 'clothesProducts',
-      component: () => import('../views/Clothes.vue')
-    }
+      component: () => import('../views/ClothItem.vue')
+    },
+    {
+      path: '/laundry/:product',
+      name: 'laundryProducts',
+      component: () => import('../views/LaundryItem.vue')
+    },
+    {
+      path: '/shoes/:product',
+      name: 'shoesProducts',
+      component: () => import('../views/ShoeItem.vue')
+    },
+    {
+      path: '/bags/:product',
+      name: 'bagsProducts',
+      component: () => import('../views/BagItem.vue')
+    },
+    {
+      path: '/makeup/:product',
+      name: 'makeupProducts',
+      component: () => import('../views/MakeupItem.vue')
+    },
+    {
+      path: '/makeupservices/:product',
+      name: 'makeupservicesProducts',
+      component: () => import('../views/MakeupServiceItem.vue')
+    },
+    {
+      path: '/laptops/:product',
+      name: 'laptopsProducts',
+      component: () => import('../views/LaptopItem.vue')
+    },
+    {
+      path: '/smartphones/:product',
+      name: 'smartphonesProducts',
+      component: () => import('../views/SmartphoneItem.vue')
+    },
+    {
+      path: '/phonecases/:product',
+      name: 'phonecasesProducts',
+      component: () => import('../views/PhonecaseItem.vue')
+    },
+    {
+      path: '/watches/:product',
+      name: 'watchesProducts',
+      component: () => import('../views/WatchItem.vue')
+    },
+    {
+      path: '/electronics/:product',
+      name: 'electronicsProducts',
+      component: () => import('../views/ElectronicItem.vue')
+    },
+    {
+      path: '/tutoring/:product',
+      name: 'tutoringProducts',
+      component: () => import('../views/TutoringItem.vue')
+    },
+    {
+      path: '/macronutrients/:product',
+      name: 'macronutrientsProducts',
+      component: () => import('../views/MacronutrientItem.vue')
+    },
   ]
 })
 

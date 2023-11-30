@@ -1,20 +1,4 @@
 <script>
-  function myFunction () {{
-    var input, filter, ul, li, a, i;
-    input = document.getElementById("mySearch");
-    filter = input.value.toUpperCase();
-    ul = document.getElementById("myMenu");
-    li = ul.getElementsByTagName("li");
-
-    for (i = 0; i < li.length; i++) {{
-      a = li[i].getElementsByTagName("a")[0];
-      if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {{
-        li[i].style.display = "";
-      }} else {{
-        li[i].style.display = "none";
-      }}
-    }}
-  }}
 import axios from 'axios'
 import { useUserStore } from '@/stores/users';
 import { useSelectedProductStore } from '@/stores/selectedProduct';
@@ -26,12 +10,21 @@ export default{
         username: '',
         selectedUser: useUserStore().UserSelected,
         products: '',
-        msg: ''
+        hide: '',
+        msg: '',
+        min: '',
+        max: '',
+        search: '',
+        searching: false,
+        searchedProducts: []
       };
     },
   beforeMount(){
     if(JSON.stringify(this.selectedUser)!=='{}'){
       this.username = this.selectedUser
+    }
+    if(JSON.stringify(useSelectedProductStore().ProductSelected)!=='{}'){
+        this.selectedProduct = useSelectedProductStore().ProductSelected
     }
     this.viewProducts()
   },
@@ -66,7 +59,60 @@ export default{
       this.$router.push('/sell')
     },
     chosenProduct(product) {
+        useSelectedProductStore().changeProduct(product)
         this.$router.push(`/clothes/${product[1]}`)
+    },
+    verify(){
+      if(this.min.length === 0 || this.max.length === 0){
+        alert("Please input some values in both min and max!")
+        return
+      }
+      if(typeof(this.min) !== "number" || typeof(this.max) !== "number"){
+        alert("Please input numbers only to filter!")
+        return
+      }
+      const path = `https://udm-backend.onrender.com/filterProduct?category=Clothes&minprice=${this.min}&maxprice=${this.max}`;
+      axios.get(path)
+      .then((res) => {
+          if(res.data.length!=0){
+              if(res.data['message'] === "There is no product with such a price range!"){
+                  this.msg = "There are no products with such a price range!"
+                  this.hide = true
+              }
+              else{
+                this.hide = false
+                this.msg = ''
+                this.products = res.data;
+              }
+          }
+      })
+      .catch((error) => {
+          console.error(error);
+      });
+    },
+    searchProduct(){
+      this.searchedProducts = []
+      if(this.search.length === 0){
+        this.searching = false
+      }
+      if(this.search.length !== 0){
+        this.searching = true
+      }
+      if(this.products.length !== 0){
+        for (let i=0; i<this.products.length; i++){
+          if(this.products[i][1].toLowerCase() === this.search.toLowerCase()){
+            let inside = false
+            for(let l=0; l<this.searchedProducts.length; l++){
+              if(this.searchedProducts[l].toLowerCase() === this.products[i].toLowerCase()){
+                inside = true
+              }
+            }
+            if(!inside){
+              this.searchedProducts.push(this.products[i])
+            }
+          }
+        }
+      }
     }
   }
 }
@@ -84,28 +130,29 @@ export default{
   </header>
 
   <div id="navigation">
-    <RouterLink to='/clothes' target="_parent"><button id="activated">Clothes</button></RouterLink>
-    <RouterLink to='/laundry' target="_parent"><button id="notactivated">Laundry Services</button></RouterLink>
-    <RouterLink to='/shoes' target="_parent"><button id="notactivated">Shoes</button></RouterLink>
     <RouterLink to='/bags' target="_parent"><button id="notactivated">Bags</button></RouterLink>
+    <button id="activated">Clothes</button>
+    <RouterLink to='/electronics' target="_parent"><button id="notactivated">Earphones & Headsets</button></RouterLink>
+    <RouterLink to='/laptops' target="_parent"><button id="notactivated">Laptops</button></RouterLink>
+    <RouterLink to='/laundry' target="_parent"><button id="notactivated">Laundry Services</button></RouterLink>
+    <RouterLink to='/macronutrients' target="_parent"><button id="notactivated">Macronutrients & Other Supplements</button></RouterLink>
     <RouterLink to='/makeup' target="_parent"><button id="notactivated">Makeup Accessories</button></RouterLink>
     <RouterLink to='/makeupservices' target="_parent"><button id="notactivated">Makeup Services</button></RouterLink>
-    <RouterLink to='/laptops' target="_parent"><button id="notactivated">Laptops</button></RouterLink>
-    <RouterLink to='/smartphones' target="_parent"><button id="notactivated">Smartphones</button></RouterLink>
     <RouterLink to='/phonecases' target="_parent"><button id="notactivated">Phone Cases</button></RouterLink>
-    <RouterLink to='/watches' target="_parent"><button id="notactivated">Watches</button></RouterLink>
-    <RouterLink to='/electronics' target="_parent"><button id="notactivated">Earphones & Headsets</button></RouterLink>
+    <RouterLink to='/shoes' target="_parent"><button id="notactivated">Shoes</button></RouterLink>
+    <RouterLink to='/smartphones' target="_parent"><button id="notactivated">Smartphones</button></RouterLink>
     <RouterLink to='/tutoring' target="_parent"><button id="notactivated">Tutoring Services</button></RouterLink>
-    <RouterLink to='/macronutrients' target="_parent"><button id="notactivated">Macronutrients & Other Supplements</button></RouterLink>
+    <RouterLink to='/watches' target="_parent"><button id="notactivated">Watches</button></RouterLink>
   </div>
 
   <div id="search">
-    <input type="text" id="mySearch" v-on:keyup="myFunction" placeholder="Search.." title="Type in a product name">
-    <input type="number" id="min" placeholder="Enter min price">
-    <input type="number" id="max" placeholder="Enter max price">
+    <input type="text" id="mySearch" v-model="search" v-on:keyup="searchProduct" placeholder="Search.." title="Type in a product name">
+    <input type="number" id="min" placeholder="Enter min price" v-model="min">
+    <input type="number" id="max" placeholder="Enter max price" v-model="max">
     <input id="filter" type="submit" v-on:click="verify()" value="Filter">
 
-    <ul v-for="product in products" id="myMenu2" @click="chosenProduct(product)">
+    <p v-if="!searching" id="noproductsmsg">{{ msg }}</p>
+    <ul v-if="!hide && !searching" v-for="product in products" id="myMenu2" @click="chosenProduct(product)">
         <li>
             <img v-bind:src="product[3]">
             <p style="white-space: pre;">
@@ -113,6 +160,16 @@ export default{
             </p>
         </li>
     </ul>  
+
+    <p v-if="searching" id="noproductsmsg">{{ msg }}</p>
+    <ul v-if="!hide && searching" v-for="product in searchedProducts" id="myMenu2" @click="chosenProduct(product)">
+        <li>
+            <img v-bind:src="product[3]">
+            <p style="white-space: pre;">
+                <strong>{{product[1]}} <em>@ Ksh. {{ product[5] }}</em></strong> <br><br>Only {{ product[6] }} remaining <br><br><em>Details:</em><br>{{ product[4] }}
+            </p>
+        </li>
+    </ul>
   </div>
 
   <footer>
@@ -125,15 +182,14 @@ export default{
 </template>
 
 <style scoped>
-#navigation {
+  #navigation {
     width: 100%;
     margin: auto;
-    margin-left: 25px;
+    margin-left: 15vh;
   }
   #navigation button {
-    margin: 40px 7px 20px 7px;
-    border-radius: 30px;
-    border: 3px solid #000000;
+    margin: 40px 0px 20px 0px;
+    border: 1px solid #777777;
     padding: 15px;
   }
   #activated{
@@ -145,7 +201,7 @@ export default{
     background-color: #2B3990;
   }
   #navigation button:hover{
-    border: 3px groove #FFFFFF;
+    border: 1px groove #FFFFFF;
   }
   #navigation #notactivated:hover{
     cursor: pointer;
@@ -156,24 +212,31 @@ export default{
   #search{
     margin-bottom:40%;
   }
-#mySearch{
-    width: 60%;
-}
-#min, #max{
-    height: 45px;
-    width: 150px;
-    outline: none;
-    font-size: 16px;
-    border-radius: 5px;
-    padding-left: 15px;
-    border: 1px solid #ccc;
-    border-bottom-width: 2px;
-    transition: all 0.3s ease;
-}
-#min{
-    margin-left: 100px;
-    margin-right: 20px;
-}
+  #mySearch{
+      width: 60%;
+  }
+  #noproductsmsg{
+    margin: auto;
+    margin-left: 5%;
+    font-weight: bolder;
+    font-size: larger;
+    margin-top: 2%;
+  }
+  #min, #max{
+      height: 45px;
+      width: 150px;
+      outline: none;
+      font-size: 16px;
+      border-radius: 5px;
+      padding-left: 15px;
+      border: 1px solid #ccc;
+      border-bottom-width: 2px;
+      transition: all 0.3s ease;
+  }
+  #min{
+      margin-left: 100px;
+      margin-right: 20px;
+  }
   #filter{
     margin: 0 0 0 20px;
     width: 5%;
@@ -193,8 +256,8 @@ export default{
    /* transform: scale(0.99); */
    background: linear-gradient(-135deg, #71b7e6, #2B3990);
    }
-footer{
+  footer{
     margin-top:35%;
     margin-bottom: 0;
-}
+  }
 </style>

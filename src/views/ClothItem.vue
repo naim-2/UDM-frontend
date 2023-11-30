@@ -1,4 +1,20 @@
 <script>
+  function myFunction () {{
+    var input, filter, ul, li, a, i;
+    input = document.getElementById("mySearch");
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("myMenu");
+    li = ul.getElementsByTagName("li");
+
+    for (i = 0; i < li.length; i++) {{
+      a = li[i].getElementsByTagName("a")[0];
+      if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {{
+        li[i].style.display = "";
+      }} else {{
+        li[i].style.display = "none";
+      }}
+    }}
+  }}
 import axios from 'axios'
 import { useUserStore } from '@/stores/users';
 import { useSelectedProductStore } from '@/stores/selectedProduct';
@@ -10,13 +26,8 @@ export default{
         username: '',
         selectedUser: useUserStore().UserSelected,
         products: '',
-        hide: '',
-        msg: '',
-        min: '',
-        max: '',
-        search: '',
-        searching: false,
-        searchedProducts: []
+        selectedProduct: '',
+        msg: ''
       };
     },
   beforeMount(){
@@ -30,7 +41,7 @@ export default{
   },
   methods: {
     viewProducts() {
-        const path = "https://udm-backend.onrender.com/viewProduct?category=Makeup Accessories";
+        const path = "https://udm-backend.onrender.com/viewProduct?category=Clothes";
         axios.get(path)
         .then((res) => {
             if(res.data.length!=0){
@@ -60,59 +71,7 @@ export default{
     },
     chosenProduct(product) {
         useSelectedProductStore().changeProduct(product)
-        this.$router.push(`/makeup/${product[1]}`)
-    },
-    verify(){
-      if(this.min.length === 0 || this.max.length === 0){
-        alert("Please input some values in both min and max!")
-        return
-      }
-      if(typeof(this.min) !== "number" || typeof(this.max) !== "number"){
-        alert("Please input numbers only to filter!")
-        return
-      }
-      const path = `https://udm-backend.onrender.com/filterProduct?category=Makeup Accessories&minprice=${this.min}&maxprice=${this.max}`;
-      axios.get(path)
-      .then((res) => {
-          if(res.data.length!=0){
-              if(res.data['message'] === "There is no product with such a price range!"){
-                  this.msg = "There are no products with such a price range!"
-                  this.hide = true
-              }
-              else{
-                this.hide = false
-                this.msg = ''
-                this.products = res.data;
-              }
-          }
-      })
-      .catch((error) => {
-          console.error(error);
-      });
-    },
-    searchProduct(){
-      this.searchedProducts = []
-      if(this.search.length === 0){
-        this.searching = false
-      }
-      if(this.search.length !== 0){
-        this.searching = true
-      }
-      if(this.products.length !== 0){
-        for (let i=0; i<this.products.length; i++){
-          if(this.products[i][1].toLowerCase() === this.search.toLowerCase()){
-            let inside = false
-            for(let l=0; l<this.searchedProducts.length; l++){
-              if(this.searchedProducts[l].toLowerCase() === this.products[i].toLowerCase()){
-                inside = true
-              }
-            }
-            if(!inside){
-              this.searchedProducts.push(this.products[i])
-            }
-          }
-        }
-      }
+        this.$router.push(`/clothes/${product[1]}`)
     }
   }
 }
@@ -131,12 +90,12 @@ export default{
 
   <div id="navigation">
     <RouterLink to='/bags' target="_parent"><button id="notactivated">Bags</button></RouterLink>
-    <RouterLink to='/clothes' target="_parent"><button id="notactivated">Clothes</button></RouterLink>
+    <button id="activated">Clothes</button>
     <RouterLink to='/electronics' target="_parent"><button id="notactivated">Earphones & Headsets</button></RouterLink>
     <RouterLink to='/laptops' target="_parent"><button id="notactivated">Laptops</button></RouterLink>
     <RouterLink to='/laundry' target="_parent"><button id="notactivated">Laundry Services</button></RouterLink>
     <RouterLink to='/macronutrients' target="_parent"><button id="notactivated">Macronutrients & Other Supplements</button></RouterLink>
-    <button id="activated">Makeup Accessories</button>
+    <RouterLink to='/makeup' target="_parent"><button id="notactivated">Makeup Accessories</button></RouterLink>
     <RouterLink to='/makeupservices' target="_parent"><button id="notactivated">Makeup Services</button></RouterLink>
     <RouterLink to='/phonecases' target="_parent"><button id="notactivated">Phone Cases</button></RouterLink>
     <RouterLink to='/shoes' target="_parent"><button id="notactivated">Shoes</button></RouterLink>
@@ -146,31 +105,24 @@ export default{
   </div>
 
   <div id="search">
-    <input type="text" id="mySearch" v-model="search" v-on:keyup="searchProduct" placeholder="Search.." title="Type in a product name">
-    <input type="number" id="min" placeholder="Enter min price" v-model="min">
-    <input type="number" id="max" placeholder="Enter max price" v-model="max">
-    <input id="filter" type="submit" v-on:click="verify()" value="Filter">
 
-    <p v-if="!searching" id="noproductsmsg">{{ msg }}</p>
-    <ul v-if="!hide && !searching" v-for="product in products" id="myMenu2" @click="chosenProduct(product)">
+    <ul v-if="selectedProduct" id="myMenu3">
         <li>
-            <img v-bind:src="product[3]">
+            <img v-bind:src="selectedProduct[3]">
             <p style="white-space: pre;">
-                <strong>{{product[1]}} <em>@ Ksh. {{ product[5] }}</em></strong> <br><br>Only {{ product[6] }} remaining <br><br><em>Details:</em><br>{{ product[4] }}
+                <strong>{{selectedProduct[1]}} <em>@ Ksh. {{ selectedProduct[5] }}</em></strong> <br><br>Only {{ selectedProduct[6] }} remaining <br><br><em>Details:</em><br>{{ selectedProduct[4] }}
             </p>
+            <input id="contact" type="submit" v-on:click="call()" value="Call">
+            <input id="contact" type="submit" v-on:click="email()" value="Email">
         </li>
     </ul>  
-
-    <p v-if="searching" id="noproductsmsg">{{ msg }}</p>
-    <ul v-if="!hide && searching" v-for="product in searchedProducts" id="myMenu2" @click="chosenProduct(product)">
-        <li>
-            <img v-bind:src="product[3]">
-            <p style="white-space: pre;">
-                <strong>{{product[1]}} <em>@ Ksh. {{ product[5] }}</em></strong> <br><br>Only {{ product[6] }} remaining <br><br><em>Details:</em><br>{{ product[4] }}
-            </p>
-        </li>
-    </ul>
   </div>
+  <p id="warning">
+    Don't send any pre-payments.
+    Meet the seller at a safe public place.
+    Inspect the goods to make sure they meet your needs
+    and pay if you're satisfied.
+  </p>
 
   <footer>
     For any enquiries, please contact:
@@ -182,7 +134,7 @@ export default{
 </template>
 
 <style scoped>
-  #navigation {
+#navigation {
     width: 100%;
     margin: auto;
     margin-left: 15vh;
@@ -201,7 +153,7 @@ export default{
     background-color: #2B3990;
   }
   #navigation button:hover{
-    border: 1px groove #FFFFFF;
+    border: 3px groove #FFFFFF;
   }
   #navigation #notactivated:hover{
     cursor: pointer;
@@ -210,36 +162,12 @@ export default{
     cursor: not-allowed;
   }
   #search{
-    margin-bottom:40%;
+    margin-bottom: 330px;
   }
-  #mySearch{
-      width: 60%;
-  }
-  #noproductsmsg{
-    margin: auto;
-    margin-left: 5%;
-    font-weight: bolder;
-    font-size: larger;
-    margin-top: 2%;
-  }
-  #min, #max{
-      height: 45px;
-      width: 150px;
-      outline: none;
-      font-size: 16px;
-      border-radius: 5px;
-      padding-left: 15px;
-      border: 1px solid #ccc;
-      border-bottom-width: 2px;
-      transition: all 0.3s ease;
-  }
-  #min{
-      margin-left: 100px;
-      margin-right: 20px;
-  }
-  #filter{
-    margin: 0 0 0 20px;
-    width: 5%;
+  #contact{
+    height: 45px;
+    width: 200px;
+    margin: 50px 0 0 600px;
     border-radius: 5px;
     border: none;
     color: #fff;
@@ -249,15 +177,23 @@ export default{
     cursor: pointer;
     transition: all 0.3s ease;
     background: linear-gradient(135deg, #71b7e6, #2B3990);
-    padding: 15px;
-    height: 52px;
   }
-  #filter:hover{
+  #contact:hover{
    /* transform: scale(0.99); */
    background: linear-gradient(-135deg, #71b7e6, #2B3990);
    }
-  footer{
-    margin-top:35%;
-    margin-bottom: 0;
+  #warning{
+    background-color: #880000;
+    color: #FFFFFF;
+    font-size: larger;
+    padding: 15px;
+    border-radius: 15px;
+    width: 80%;
+    margin: 8%;
+    text-align: center;
   }
+footer{
+    margin-top:12.5%;
+    margin-bottom: 0;
+}
 </style>
