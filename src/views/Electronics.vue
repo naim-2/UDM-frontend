@@ -20,6 +20,11 @@ export default{
       };
     },
   beforeMount(){
+    if(useUserStore().UserSelected.length === undefined){
+      this.$router.push('/log-in')
+    }
+  },
+  mounted(){
     if(JSON.stringify(this.selectedUser)!=='{}'){
       this.username = this.selectedUser
     }
@@ -27,11 +32,6 @@ export default{
         this.selectedProduct = useSelectedProductStore().ProductSelected
     }
     this.viewProducts()
-  },
-  beforeMount(){
-    if(useUserStore().UserSelected.length === undefined){
-      this.$router.push('/log-in')
-    }
   },
   methods: {
     viewProducts() {

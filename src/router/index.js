@@ -164,6 +164,11 @@ const router = createRouter({
       name: 'macronutrientsProducts',
       component: () => import('../views/MacronutrientItem.vue')
     },
+    {
+      path: '/admin',
+      name: 'admin',
+      component: () => import('../views/AdminPage.vue')
+    }
   ]
 })
 

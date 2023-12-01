@@ -19,7 +19,7 @@ export default{
         searchedProducts: []
       };
     },
-  beforeMount(){
+  mounted(){
     if(JSON.stringify(this.selectedUser)!=='{}'){
       this.username = this.selectedUser
     }

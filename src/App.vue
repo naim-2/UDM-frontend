@@ -14,7 +14,7 @@ export default{
       this.username = this.selectedUser
     }
     if(useUserStore().UserSelected.length === undefined){
-      this.$router.push('/log-in')
+      this.$router.push('/')
     }
   },
   methods: {

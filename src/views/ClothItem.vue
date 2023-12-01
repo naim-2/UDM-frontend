@@ -34,10 +34,11 @@ export default{
         sellerPhonenumber: '',
         sellerEmail: '',
         userFirstname: '',
-        userLastname: ''
+        userLastname: '',
+        reviews: ''
       };
     },
-  beforeMount(){
+  mounted(){
     if(JSON.stringify(this.selectedUser)!=='{}'){
       this.username = this.selectedUser
     }
@@ -45,8 +46,6 @@ export default{
         this.selectedProduct = useSelectedProductStore().ProductSelected
     }
     this.viewProducts()
-  },
-  mounted(){
     const path = `https://udm-backend.onrender.com/viewSeller?username=${this.selectedProduct[0]}`;
       axios.get(path)
       .then((res) => {
@@ -79,16 +78,14 @@ export default{
   },
   methods: {
     viewProducts() {
-        const path = "https://udm-backend.onrender.com/viewProduct?category=Clothes";
+        const path = `https://udm-backend.onrender.com/getReview?username=${this.selectedProduct[0]}&productname=${this.selectedProduct[1]}`;
         axios.get(path)
         .then((res) => {
-            if(res.data.length!=0){
-                if(res.data['message'] === "There are no products in this category!"){
-                    this.msg = "There are no products in this category!"
-                }
-                else{
-                    this.products = res.data;
-                }
+            if(res.data['message']!=0 || res.data['message']!=undefined){
+              this.reviews = res.data
+            }
+            else{
+              this.msg = "There are currently no reviews!"
             }
         })
         .catch((error) => {
@@ -168,6 +165,10 @@ export default{
     Inspect the goods to make sure they meet your needs
     and pay if you're satisfied.
   </p>
+
+  <!-- <div v-if="msg" id="reviews">
+    {{ reviews }}
+  </div> -->
 
   <footer>
     For any enquiries, please contact:

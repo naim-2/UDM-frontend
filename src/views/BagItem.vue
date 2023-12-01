@@ -37,7 +37,7 @@ export default{
         userLastname: ''
       };
     },
-  beforeMount(){
+  mounted(){
     if(JSON.stringify(this.selectedUser)!=='{}'){
       this.username = this.selectedUser
     }
@@ -45,8 +45,6 @@ export default{
         this.selectedProduct = useSelectedProductStore().ProductSelected
     }
     this.viewProducts()
-  },
-  mounted(){
     const path = `https://udm-backend.onrender.com/viewSeller?username=${this.selectedProduct[0]}`;
       axios.get(path)
       .then((res) => {

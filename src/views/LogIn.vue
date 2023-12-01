@@ -73,8 +73,11 @@
                           if(res.data[3] === "buyer"){
                             this.$router.push('/')
                           }
-                          else{
+                          else if(res.data[3] === "seller"){
                             this.$router.push('/sell')
+                          }
+                          else{
+                            this.$router.push('/admin')
                           }
                         }
                     })
