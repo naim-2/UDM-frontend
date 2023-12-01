@@ -148,11 +148,11 @@ export default{
 
 
     <RouterLink to='/makeup' target="_parent"><button id="notactivated">Makeup Accessories</button></RouterLink>
-    <button id="activated">Makeup Services</button>
+    
     <RouterLink to='/phonecases' target="_parent"><button id="notactivated">Phone Cases</button></RouterLink>
     <RouterLink to='/shoes' target="_parent"><button id="notactivated">Shoes</button></RouterLink>
     <RouterLink to='/smartphones' target="_parent"><button id="notactivated">Smartphones</button></RouterLink>
-    <RouterLink to='/tutoring' target="_parent"><button id="notactivated">Tutoring Services</button></RouterLink>
+
     <RouterLink to='/watches' target="_parent"><button id="notactivated">Watches</button></RouterLink>
   </div>
 
