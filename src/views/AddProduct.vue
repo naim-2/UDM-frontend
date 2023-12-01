@@ -78,8 +78,8 @@
             image: '',
             details: '',
             msg: '',
-            categories: ["Bags","Clothes","Earphones and Headsets","Laptops","Laundry Services","Macronutrients and Other Supplements",
-            "Makeup Accessories","Makeup Services","Phone Cases","Shoes","Smartphones","Tutoring Services","Watches"],
+            categories: ["Bags","Clothes","Earphones and Headsets","Laptops",
+            "Makeup Accessories","Phone Cases","Shoes","Smartphones","Watches"],
             selectedCategory: '',
           };
         },

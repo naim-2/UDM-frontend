@@ -146,7 +146,6 @@ export default{
     <RouterLink to='/electronics' target="_parent"><button id="notactivated">Earphones & Headsets</button></RouterLink>
     <RouterLink to='/laptops' target="_parent"><button id="notactivated">Laptops</button></RouterLink>
 
-    <button id="activated">Macronutrients & Other Supplements</button>
     <RouterLink to='/makeup' target="_parent"><button id="notactivated">Makeup Accessories</button></RouterLink>
     <RouterLink to='/makeupservices' target="_parent"><button id="notactivated">Makeup Services</button></RouterLink>
     <RouterLink to='/phonecases' target="_parent"><button id="notactivated">Phone Cases</button></RouterLink>
