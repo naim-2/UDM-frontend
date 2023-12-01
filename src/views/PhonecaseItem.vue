@@ -101,9 +101,6 @@ export default{
               let storeThis = finalListReview[0].slice(2).slice(0, -1).split("%20")
               let userReview = []
               let count = 0
-              let firstReview = []
-              firstReview.push(storeThis)
-              console.log(finalListReview)
               this.reviews.push(storeThis)
               this.done = true;
               // for(let j=0; j<storeThis; j++){
@@ -203,7 +200,7 @@ export default{
     <RouterLink to='/clothes' target="_parent"><button id="notactivated">Clothes</button></RouterLink>
     <RouterLink to='/electronics' target="_parent"><button id="notactivated">Earphones & Headsets</button></RouterLink>
     <RouterLink to='/laptops' target="_parent"><button id="notactivated">Laptops</button></RouterLink>
-    <RouterLink to='/laundry' target="_parent"><button id="notactivated">Laundry Services</button></RouterLink>
+
     <RouterLink to='/macronutrients' target="_parent"><button id="notactivated">Macronutrients & Other Supplements</button></RouterLink>
     <RouterLink to='/makeup' target="_parent"><button id="notactivated">Makeup Accessories</button></RouterLink>
     <RouterLink to='/makeupservices' target="_parent"><button id="notactivated">Makeup Services</button></RouterLink>

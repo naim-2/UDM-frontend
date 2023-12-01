@@ -89,14 +89,14 @@ export default{
       <li><RouterLink to='/log-in' target="_parent">Clothes<br><img src="../assets/clothes.png"></RouterLink></li>
       <li><RouterLink to='/log-in' target="_parent">Earphones and Headsets<br><img src="../assets/electronics.png"></RouterLink></li>
       <li><RouterLink to='/log-in' target="_parent">Laptops<br><img src="../assets/laptops.png"></RouterLink></li>
-      <li><RouterLink to='/log-in' target="_parent">Laundry Services<br><img src="../assets/laundry.png"></RouterLink></li>
-      <li><RouterLink to='/log-in' target="_parent">Macronutrients and Other Supplements<br><img src="../assets/macronutrients.png"></RouterLink></li>
+      <!-- <li><RouterLink to='/log-in' target="_parent">Laundry Services<br><img src="../assets/laundry.png"></RouterLink></li> -->
+      <!-- <li><RouterLink to='/log-in' target="_parent">Macronutrients and Other Supplements<br><img src="../assets/macronutrients.png"></RouterLink></li> -->
       <li><RouterLink to='/log-in' target="_parent">Makeup Accessories<br><img src="../assets/makeup.png"></RouterLink></li>
-      <li><RouterLink to='/log-in' target="_parent">Makeup Services<br><img src="../assets/makeupservices.png"></RouterLink></li>
+      <!-- <li><RouterLink to='/log-in' target="_parent">Makeup Services<br><img src="../assets/makeupservices.png"></RouterLink></li> -->
       <li><RouterLink to='/log-in' target="_parent">Phone Cases<br><img src="../assets/phonecases.png"></RouterLink></li>
       <li><RouterLink to='/log-in' target="_parent">Shoes<br><img src="../assets/shoes.png"></RouterLink></li>
       <li><RouterLink to='/log-in' target="_parent">Smartphones<br><img src="../assets/smartphones.png"></RouterLink></li>
-      <li><RouterLink to='/log-in' target="_parent">Tutoring Services<br><img src="../assets/tutoring.png"></RouterLink></li>
+      <!-- <li><RouterLink to='/log-in' target="_parent">Tutoring Services<br><img src="../assets/tutoring.png"></RouterLink></li> -->
       <li><RouterLink to='/log-in' target="_parent">Watches<br><img src="../assets/watches.png"></RouterLink></li>
     </ul>
 
@@ -105,14 +105,14 @@ export default{
       <li><RouterLink to='/clothes' target="_parent">Clothes<br><img src="../assets/clothes.png"></RouterLink></li>
       <li><RouterLink to='/electronics' target="_parent">Earphones and Headsets<br><img src="../assets/electronics.png"></RouterLink></li>
       <li><RouterLink to='/laptops' target="_parent">Laptops<br><img src="../assets/laptops.png"></RouterLink></li>
-      <li><RouterLink to='/laundry' target="_parent">Laundry Services<br><img src="../assets/laundry.png"></RouterLink></li>
-      <li><RouterLink to='/macronutrients' target="_parent">Macronutrients and Other Supplements<br><img src="../assets/macronutrients.png"></RouterLink></li>
+      <!-- <li><RouterLink to='/laundry' target="_parent">Laundry Services<br><img src="../assets/laundry.png"></RouterLink></li> -->
+      <!-- <li><RouterLink to='/macronutrients' target="_parent">Macronutrients and Other Supplements<br><img src="../assets/macronutrients.png"></RouterLink></li> -->
       <li><RouterLink to='/makeup' target="_parent">Makeup Accessories<br><img src="../assets/makeup.png"></RouterLink></li>
-      <li><RouterLink to='/makeupservices' target="_parent">Makeup Services<br><img src="../assets/makeupservices.png"></RouterLink></li>
+      <!-- <li><RouterLink to='/makeupservices' target="_parent">Makeup Services<br><img src="../assets/makeupservices.png"></RouterLink></li> -->
       <li><RouterLink to='/phonecases' target="_parent">Phone Cases<br><img src="../assets/phonecases.png"></RouterLink></li>
       <li><RouterLink to='/shoes' target="_parent">Shoes<br><img src="../assets/shoes.png"></RouterLink></li>
       <li><RouterLink to='/smartphones' target="_parent">Smartphones<br><img src="../assets/smartphones.png"></RouterLink></li>
-      <li><RouterLink to='/tutoring' target="_parent">Tutoring Services<br><img src="../assets/tutoring.png"></RouterLink></li>
+      <!-- <li><RouterLink to='/tutoring' target="_parent">Tutoring Services<br><img src="../assets/tutoring.png"></RouterLink></li> -->
       <li><RouterLink to='/watches' target="_parent">Watches<br><img src="../assets/watches.png"></RouterLink></li>
     </ul>
   </div>

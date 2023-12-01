@@ -119,7 +119,7 @@
               <td>{{ product[5] }}</td>
               <td>{{ product[6] }}</td>
               <td>{{ product[4] }}</td>
-              <td v-if="product[7]!=='{}'">{{ product[7] }}</td>
+              <td v-if="product[7]!=='{}'">{{ product[7].split(",")[4] }}</td>
               <td v-if="product[7]=='{}'"> None </td>
               <td id="actions">
                 <button id="edit" @click="editProduct(product)">EDIT</button>
