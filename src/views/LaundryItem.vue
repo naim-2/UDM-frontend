@@ -33,8 +33,14 @@ export default{
         sellerLastname: '',
         sellerPhonenumber: '',
         sellerEmail: '',
+        sellerUsername: '',
         userFirstname: '',
-        userLastname: ''
+        userLastname: '',
+        giveReview: '',
+        reviews: [],
+        givenReview: '',
+        review: '',
+        done: false
       };
     },
   mounted(){
@@ -44,7 +50,7 @@ export default{
     if(JSON.stringify(useSelectedProductStore().ProductSelected)!=='{}'){
         this.selectedProduct = useSelectedProductStore().ProductSelected
     }
-    this.viewProducts()
+    this.viewReviews()
     const path = `https://udm-backend.onrender.com/viewSeller?username=${this.selectedProduct[0]}`;
       axios.get(path)
       .then((res) => {
@@ -53,6 +59,7 @@ export default{
             this.sellerLastname = res.data[1]
             this.sellerPhonenumber = res.data[2]
             this.sellerEmail = res.data[3]
+            this.sellerUsername = res.data[4]
           }
       })
       .catch((error) => {
@@ -76,17 +83,38 @@ export default{
     }
   },
   methods: {
-    viewProducts() {
-        const path = "https://udm-backend.onrender.com/viewProduct?category=Laundry Services";
+    viewReviews() {
+        const path = `https://udm-backend.onrender.com/getReview?username=${this.selectedProduct[0]}&productname=${this.selectedProduct[1]}`;
         axios.get(path)
         .then((res) => {
-            if(res.data.length!=0){
-                if(res.data['message'] === "There are no products in this category!"){
-                    this.msg = "There are no products in this category!"
+            if(res.data[0][0] === "{}"){
+              this.msg = "There are currently no reviews!"
+            }
+            else{
+              let listReview = (res.data[0][0].split('!@#$%^&*()'))
+              let finalListReview = []
+              for(let i=1; i<listReview.length; i++){
+                if(i%2 === 0){
+                  finalListReview.push(listReview[i])
                 }
-                else{
-                    this.products = res.data;
-                }
+              }
+              let storeThis = finalListReview[0].slice(2).slice(0, -1).split("%20")
+              let userReview = []
+              let count = 0
+              let firstReview = []
+              firstReview.push(storeThis)
+              console.log(finalListReview)
+              this.reviews.push(storeThis)
+              this.done = true;
+              // for(let j=0; j<storeThis; j++){
+              //   userReview.push(storeThis[j])
+              //   console.log(storeThis)
+              //   if(j === 2 + count){
+              //     this.reviews.push(userReview)
+              //     userReview = []
+              //     count += 3
+              //   }
+              // }
             }
         })
         .catch((error) => {
@@ -113,7 +141,47 @@ export default{
       useUserStore().changeUser(undefined);
       this.selectedUser = ''
       this.$router.go('/');
-    }
+    },
+    allowReview(){
+      this.giveReview = true;
+    },
+    postReview(){
+      if(this.givenReview.length === 0){
+        alert("Please input some text in the review!")
+        return;
+      }
+      if(this.givenReview.length !== 0){
+        const currentDate = new Date();
+
+        const currentDayOfMonth = currentDate.getDate();
+        const currentMonth = currentDate.getMonth();
+        const currentYear = currentDate.getFullYear();
+
+        const dateString = currentDayOfMonth + "-" + (currentMonth + 1) + "-" + currentYear;
+        this.review = dateString + "%20" + this.selectedUser + "%20" + this.givenReview
+        const path = 'https://udm-backend.onrender.com/postReview';
+          axios.put(path, {
+              "username": this.sellerUsername.toLowerCase(),
+              "productname": this.selectedProduct[1],
+              "reviews": this.review
+          })
+            .then((res) => {
+              if(res.data.length!=0){
+                if(res.data['message'] === "Review added successfully!"){
+                    this.msg = "Review added successfully!";
+                    this.viewReviews()
+                    this.giveReview = false
+                }
+                else{
+                  this.msg = "Review added successfully!";
+                }
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        }
+      }
   }
 }
 </script>
@@ -155,8 +223,8 @@ export default{
                 <strong>{{selectedProduct[1]}} <em>@ Kshs. {{ selectedProduct[5] }}</em></strong> <br><br>Only {{ selectedProduct[6] }} remaining <br><br><em>Details:</em><br>{{ selectedProduct[4] }}
             </p>
             <p id="names">Seller's Name: <strong>{{sellerFirstname}} {{sellerLastname}}</strong></p>
-            <a v-bind:href="'tel:'+sellerPhonenumber"><input id="contact" type="submit" value="Call"></a>
-            <a :data="selectedProduct" v-bind:href="'mailto:'+sellerEmail+'?subject=UDM LAUNDRY SERVICES&body=Greetings, I am interested at the product with the name: '+selectedProduct[1]+'; that goes at Kshs. '+selectedProduct[5]+' with only '+selectedProduct[6]+' remaining. Kind regards, '+userFirstname+' '+userLastname+'.'"><input id="contact" type="submit" value="Email"></a>
+            <a @click="allowReview" v-bind:href="'tel:'+sellerPhonenumber"><input id="contact" type="submit" value="Call"></a>
+            <a @click="allowReview" :data="selectedProduct" v-bind:href="'mailto:'+sellerEmail+'?subject=UDM LAUNDRY SERVICES&body=Greetings, I am interested at the product with the name: '+selectedProduct[1]+'; that goes at Kshs. '+selectedProduct[5]+' with only '+selectedProduct[6]+' remaining. Kind regards, '+userFirstname+' '+userLastname+'.'"><input id="contact" type="submit" value="Email"></a>
         </li>
     </ul>  
   </div>
@@ -167,6 +235,23 @@ export default{
     and pay if you're satisfied.
   </p>
 
+  <p id="reviewsh">REVIEWS</p>
+  <div v-if="msg" id="noreviews">
+    {{ this.msg }}
+  </div>
+  <div v-if="giveReview" id="yesreviews">
+    <textarea v-model="givenReview" rows="5" ></textarea>
+    <button @click="postReview()">SUBMIT</button>
+  </div>
+  <div v-if="reviews && done">
+    <div v-for="times in reviews.length">
+      <div style="border: 3px solid black;padding: 10px;">
+        <p><strong> On {{  reviews[0][0] }} </strong></p>
+        <p><em>{{ reviews[0][1] }} </em></p>
+        <p>Comment: {{ reviews[0][2] }}</p> 
+      </div>
+    </div>
+  </div>
   <footer>
     For any enquiries, please contact:
     <br>

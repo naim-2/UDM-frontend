@@ -303,6 +303,49 @@ header img{
       font-weight: bolder;
       font-size: larger;
     }
+
+    #reviewsh{
+      font-size: 22px;
+      font-weight: bolder;
+      text-align: center;
+    }
+
+    #noreviews{
+      font-size: larger;
+      text-align: center;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
+    #yesreviews>textarea{
+      margin-top: 40px;
+      width: 80%;
+      margin-left: 10%;
+      border: 2px solid black;
+      padding: 20px;
+    }
+
+    #yesreviews>button{
+      height: 45px;
+      width: 200px;
+      margin-left: 80%;
+      margin-top: 15px;
+      margin-bottom: 15px;
+      border-radius: 5px;
+      border: none;
+      color: #fff;
+      font-size: 18px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: linear-gradient(135deg, #00c700, #002900);
+    }
+    
+    #yesreviews>button:hover{
+     /* transform: scale(0.99); */
+     background: linear-gradient(-135deg, #00c700, #002900);
+     }
   
     footer{
       background-color: #2B3990;
